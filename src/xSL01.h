@@ -134,14 +134,14 @@ class xSL01: public xCoreClass
 		*
 		* @return none
 		*/		
-		void 	readTSL(void);
+		void 	GET_TSL(void);
 		
 		/*
 		* Reads Raw UV data over I2C.
 		*
 		* @return none
 		*/			
-		void 	readVEML(void);
+		void 	GET_VEML(void);
 		
 		/*
 		* Reads UVA and UVB data over I2C.
