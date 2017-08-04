@@ -47,8 +47,8 @@ bool xSL01::begin(void)
 *********************************************************/
 void xSL01::poll(void) 
 {
-	readTSL();
-	readVEML();
+	GET_TSL();
+	GET_VEML();
 	calculateIndex();
 }
 
@@ -89,7 +89,7 @@ float xSL01::getUVIndex(void)
 /********************************************************
  	Reads Data from TSL4531
 *********************************************************/
-void xSL01::readTSL(void) 
+void xSL01::GET_TSL(void) 
 {
 	int multi = 4;
 	raw_LUX_H = xCore.read8(TSL4531_I2C_ADDRESS, (TSL4531_WRITE_CMD | TSL4531_REG_DATA_HIGH));
@@ -100,13 +100,12 @@ void xSL01::readTSL(void)
 /********************************************************
  	Reads data from VEML6075
 *********************************************************/
-void xSL01::readVEML(void)
+void xSL01::GET_VEML(void)
 {
 	float UVAsensitivity = 0.46;
 	float UVBsensitivity = 1.05;
 	
-	readUVdata();
-	
+	readUVdata();	
 	
 	UVAintensity = (float)rawUVA/UVAsensitivity;
 	UVBintensity = (float)rawUVB/UVBsensitivity;
