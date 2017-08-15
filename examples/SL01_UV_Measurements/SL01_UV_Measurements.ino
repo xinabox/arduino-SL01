@@ -52,14 +52,14 @@ void loop() {
 	// Display Data on the Serial monitor
 	Serial.print("UVA Intersity: ");
 	Serial.print(uv);
-	Serial.println(" uW/cm^2");
+	Serial.println(" uW/m^2");
 	
 	// Request SL01 to return calculated UVB intensity
 	uv = SL01.getUVB();
 	// Display Data on the Serial monitor
 	Serial.print("UVB Intensity: ");
 	Serial.print(uv);
-	Serial.println(" uW/cm^2");
+	Serial.println(" uW/m^2");
 
 	// Request SL01 to return calculated UVB intensity
 	uv = SL01.getUVIndex();
