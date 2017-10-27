@@ -2,7 +2,7 @@
 <img src="extras/SL01 V1.0.0.JPG" width="35%" height="auto" align="right">
 Digital (I2C) Light Sensor.
 
-This module can be purchased on [Xinabox CC](https://xinabox.cc/SW01/).
+This module can be purchased on [Xinabox CC](https://xinabox.cc/products/SL01/).
 
 ## About the SL01
 This ☒CHIP forms part of the sensor modules and is equipped with a light sensor that is capable of measuring the luminosity(Wide Dynamic Range — 3 lux to 220k lux) (visual brightness), UVA and UVB radiation. The light sensor converts solar UV light intensity to digital data and has displayed reliable performance of UV radiation measurement under long periods of UV exposure.  This ☒CHIP is also capable of detecting the UVA and UVB radiation of different lightbulbs and is ideal for data collection and learning in schools. It has a very low power consumption. 
