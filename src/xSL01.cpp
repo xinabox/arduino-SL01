@@ -19,8 +19,7 @@
 /********************************************************
  	Constructor
 *********************************************************/
-xSL01::xSL01(void) 
-{
+xSL01::xSL01(void) {
 	UVAintensity = 0.0;
 	UVBintensity = 0.0; 
 	UVindex = 0.0;
@@ -29,24 +28,22 @@ xSL01::xSL01(void)
 	rawUVB = 0;
 	UVcomp1 = 0;
 	UVcomp2 = 0;
-
 }
 
 /********************************************************
  	Configure Sensor
 *********************************************************/
-bool xSL01::begin(void)
-{
+bool xSL01::begin(void){
 	writeVEML(VEML6075_REG_CONF, VEML6075_CONF_IT_100, 0x00);
 	xCore.write8(TSL4531_I2C_ADDRESS , (TSL4531_WRITE_CMD | TSL4531_REG_CONTROL), TSL4531_CONF_START);
-	xCore.write8(TSL4531_I2C_ADDRESS , (TSL4531_WRITE_CMD | TSL4531_REG_CONF), (TSL4531_CONF_IT_100 | TSL4531_CONF_PSAVE));
+	xCore.write8(TSL4531_I2C_ADDRESS , (TSL4531_WRITE_CMD | TSL4531_REG_CONF), TSL4531_CONF_IT_100);
+	poll();
 }
 
 /********************************************************
  	Reads Sensor Data
 *********************************************************/
-void xSL01::poll(void) 
-{
+void xSL01::poll(void) {
 	GET_TSL();
 	GET_VEML();
 	calculateIndex();
@@ -55,32 +52,28 @@ void xSL01::poll(void)
 /********************************************************
  	Request UVA data in micoWatts/cm^2
 *********************************************************/
-float xSL01::getUVA(void)
-{
+float xSL01::getUVA(void){
 	return UVAintensity;
 }
 
 /********************************************************
  	Request UVB data in micoWatts/cm^2
 *********************************************************/
-float xSL01::getUVB(void)
-{
+float xSL01::getUVB(void){
 	return UVBintensity;
 }
 
 /********************************************************
  	Request ambeint light in LUX
 *********************************************************/
-float xSL01::getLUX(void)
-{
+float xSL01::getLUX(void){
 	return LUX;
 }
 
 /********************************************************
  	Request ambeint light in LUX
 *********************************************************/
-float xSL01::getUVIndex(void)
-{
+float xSL01::getUVIndex(void){
 	return UVindex;
 }
 
@@ -89,33 +82,31 @@ float xSL01::getUVIndex(void)
 /********************************************************
  	Reads Data from TSL4531
 *********************************************************/
-void xSL01::GET_TSL(void) 
-{
+void xSL01::GET_TSL(void) {
 	int multi = 4;
 	raw_LUX_H = xCore.read8(TSL4531_I2C_ADDRESS, (TSL4531_WRITE_CMD | TSL4531_REG_DATA_HIGH));
 	raw_LUX_L = xCore.read8(TSL4531_I2C_ADDRESS, (TSL4531_WRITE_CMD | TSL4531_REG_DATA_LOW));
-	LUX = multi*(((float)raw_LUX_H * 256) + (float)raw_LUX_L);
+	uint16_t data = ((raw_LUX_H <<8)|(raw_LUX_L));
+	LUX = multi*((float)data);
 }
 
 /********************************************************
  	Reads data from VEML6075
 *********************************************************/
-void xSL01::GET_VEML(void)
-{
-	float UVAsensitivity = 0.46;
-	float UVBsensitivity = 1.05;
-	
+void xSL01::GET_VEML(void){	
 	readUVdata();	
 	
-	UVAintensity = (float)rawUVA/UVAsensitivity;
-	UVBintensity = (float)rawUVB/UVBsensitivity;
+	UVAintensity = (float)rawUVA;
+	UVBintensity = (float)rawUVB;
+	
+	UVAintensity -= (VEML6075_UVA_VIS_COEFF * UVcomp1) - (VEML6075_UVA_IR_COEFF * UVcomp2);
+	UVBintensity -= (VEML6075_UVB_VIS_COEFF * UVcomp1) - (VEML6075_UVB_IR_COEFF * UVcomp2);
 }
 
 /********************************************************
  	Reads data from VEML6075
 *********************************************************/
-void xSL01::readUVdata(void)
-{
+void xSL01::readUVdata(void){
 	rawUVA = readVEML(VEML6075_REG_UVA);
 	rawUVB = readVEML(VEML6075_REG_UVB);
 	UVcomp1 = readVEML(VEML6075_REG_UVCOMP1);
@@ -125,12 +116,11 @@ void xSL01::readUVdata(void)
 /********************************************************
  	Calculation of UV Index
 *********************************************************/
-void xSL01::calculateIndex(void)
-{
+void xSL01::calculateIndex(void){
 	float UVAComp, UVBComp = 0;
-	UVAComp = rawUVA - (VEML6075_UVA_VIS_COEFF * UVcomp1) - (VEML6075_UVA_IR_COEFF * UVcomp2);
-	UVBComp = rawUVB - (VEML6075_UVB_VIS_COEFF * UVcomp1) - (VEML6075_UVB_IR_COEFF * UVcomp2);
-	UVindex = ( (UVAComp*VEML6075_UVA_RESP) + (UVBComp*VEML6075_UVB_RESP) )/2.0;
+	UVAComp = (UVAintensity * VEML6075_UVA_RESP);
+	UVBComp = (UVBintensity * VEML6075_UVB_RESP);
+	UVindex = (UVAComp + UVBComp)/2.0;
 }
 
 /********************************************************
@@ -155,13 +145,11 @@ uint16_t xSL01::readVEML(byte reg){
 	Wire.beginTransmission(VEML6075_I2C_ADDRESS);
 	Wire.write((uint8_t)reg);
 	Wire.endTransmission(false);
-  Wire.requestFrom(VEML6075_I2C_ADDRESS, 2);    // Read two bytes from slave register address
-  if(Wire.available()){
-  	lowByte = Wire.read();
-    highByte = Wire.read();
+	Wire.requestFrom(VEML6075_I2C_ADDRESS, 2);    // Read two bytes from slave register address
+	if(Wire.available()){
+		lowByte = Wire.read();
+		highByte = Wire.read();
 	}
- 	Wire.endTransmission();
-	
  	value = (highByte<<8 | lowByte);
 	
   return value;
