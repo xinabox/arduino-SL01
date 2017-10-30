@@ -49,8 +49,8 @@
 #define VEML6075_UVB_VIS_COEFF		3.66
 #define VEML6075_UVB_IR_COEFF		2.75
 
-#define VEML6075_UVA_RESP 			0.0011
-#define VEML6075_UVB_RESP			0.00125
+#define VEML6075_UVA_RESP 			(1.0 / 909.0)
+#define VEML6075_UVB_RESP			(1.0 / 800.0)
 
 // Defines TSL4531 Registers
 #define TSL4531_REG_CONTROL 		0x00	// Control Register Address
