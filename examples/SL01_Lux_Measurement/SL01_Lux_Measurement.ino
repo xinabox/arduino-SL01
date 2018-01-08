@@ -12,10 +12,10 @@
 	The sensor communicates over the I2C Bus.
 
 	------------------------TIPS--------------------------
-	Change this line to ----->Wire.begin(2,14); for CW01
+	Comment out this line ----->Wire.pins(2, 14); for support
+	on other devices
 	
 *************************************************************/
-
 #include <xCore.h>
 #include <xSL01.h>
 
@@ -24,6 +24,9 @@ const int DELAY_TIME = 1000;
 void setup() {
 	// Start the Serial Monitor
 	Serial.begin(115200);
+	
+	// Set the I2C Pins for CW01
+	Wire.pins(2,14);
 	
 	// Start the I2C Comunication
 	Wire.begin();
@@ -55,7 +58,6 @@ void loop() {
 	  Serial.print("Ambient Light Level: ");
 	  Serial.print(lux);
 	  Serial.println(" LUX");
-	  
 	  Serial.println();
 
 	  delay(DELAY_TIME);
