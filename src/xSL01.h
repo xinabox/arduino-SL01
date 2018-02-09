@@ -197,6 +197,4 @@ class xSL01: public xCoreClass
 		uint8_t 	raw_LUX_H;
 };
 
-extern xSL01 SL01;
-
 #endif
