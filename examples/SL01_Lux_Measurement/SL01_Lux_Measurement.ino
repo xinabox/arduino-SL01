@@ -10,10 +10,6 @@
 	bus.
 	
 	The sensor communicates over the I2C Bus.
-
-	------------------------TIPS--------------------------
-	Comment out this line ----->Wire.pins(2, 14); for support
-	on other devices
 	
 *************************************************************/
 #include <xCore.h>
@@ -21,12 +17,17 @@
 
 const int DELAY_TIME = 1000;
 
+xSL01 SL01;
+
 void setup() {
 	// Start the Serial Monitor
 	Serial.begin(115200);
 	
-	// Set the I2C Pins for CW01
-	Wire.pins(2,14);
+  // Set the I2C Pins for CW01
+#ifdef ESP8266
+  Wire.pins(2, 14);
+  Wire.setClockStretchLimit(15000);
+#endif
 	
 	// Start the I2C Comunication
 	Wire.begin();
@@ -35,7 +36,7 @@ void setup() {
 	SL01.begin();
 
 	// Delayy for Sensor to normalise
-	delay(1000);
+	delay(DELAY_TIME);
 	
 	Serial.println("================================");
 	Serial.println(" XINABOX SL01 LUX Measurements  ");
