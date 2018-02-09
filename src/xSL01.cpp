@@ -1,7 +1,6 @@
 /*
 	This is a library for the SL01 Digital Light Sensor
 	breakout board.
-
 	The board uses I2C for communication.
 	
 	The board communicates with two I2C devices:
@@ -10,6 +9,7 @@
 	
 	Data Sheets:
 	VEML6075	- http://www.vishay.com/docs/84304/veml6075.pdf
+	VEML6075 Note	- https://www.vishay.com/docs/84339/designingveml6075.pdf
 	TSL4531		- http://wisense.in/datasheets/TSL4531.pdf
 */
 
@@ -155,6 +155,5 @@ uint16_t xSL01::readVEML(byte reg){
   return value;
 }
 
-xSL01 SL01 = xSL01();
 
 
