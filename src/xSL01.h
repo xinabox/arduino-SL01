@@ -10,6 +10,7 @@
 	
 	Data Sheets:
 	VEML6075	- http://www.vishay.com/docs/84304/veml6075.pdf
+	VEML6075 Note	- https://www.vishay.com/docs/84339/designingveml6075.pdf
 	TSL4531		- http://wisense.in/datasheets/TSL4531.pdf
 */
 #ifndef xSL01_h
@@ -36,39 +37,40 @@
 #define VEML6075_CONF_AF_FORCE 		0x00	// Normal Mode Enabled
 #define VEML6075_CONF_AF_AUTO		0x02	// Active Force Mode Disabled
 #define VEML6075_CONF_SD_OFF		0x00	// Power ON
-#define VEML6075_CONF_SD_ON			0x01	// Power OFF
+#define VEML6075_CONF_SD_ON		0x01	// Power OFF
 
-#define VEML6075_CONF_IT_50			0x00	// 50ms
+#define VEML6075_CONF_IT_50		0x00	// 50ms
 #define VEML6075_CONF_IT_100		0x10	// 100ms
 #define VEML6075_CONF_IT_200		0x20	// 200ms
 #define VEML6075_CONF_IT_400		0x30	// 400ms
 #define VEML6075_CONF_IT_800		0x40	// 800ms
 
+// Page 15/22 VEML6075 AppNote 84339
+// No teflon (open air)
 #define VEML6075_UVA_VIS_COEFF		2.22
 #define VEML6075_UVA_IR_COEFF		1.33
 #define VEML6075_UVB_VIS_COEFF		2.95
 #define VEML6075_UVB_IR_COEFF		1.74
-
-#define VEML6075_UVA_RESP	(1.0 / 684.46)
-#define VEML6075_UVB_RESP	(1.0 / 385.95)
+#define VEML6075_UVA_RESP		(1.0 / 684.46)
+#define VEML6075_UVB_RESP		(1.0 / 385.95)
 
 // Defines TSL4531 Registers
 #define TSL4531_REG_CONTROL 		0x00	// Control Register Address
-#define TSL4531_REG_CONF			0x01	// Configuration Register Address
+#define TSL4531_REG_CONF		0x01	// Configuration Register Address
 #define TSL4531_REG_DATA_LOW		0x04	// ADC low byte
 #define TSL4531_REG_DATA_HIGH		0x05	// ADC high byte
 
 // Defines TSL4531
-#define TSL4531_WRITE_CMD			0x80	// Command Register. Must write as 1.
+#define TSL4531_WRITE_CMD		0x80	// Command Register. Must write as 1.
 #define TSL4531_CONF_PWR_DOWN 		0x00	// Power OFF
 #define TSL4531_CONF_ONE_RUN 		0x02	// Run ONCE then Power OFF
-#define TSL4531_CONF_START 			0x03	// Power ON
+#define TSL4531_CONF_START 		0x03	// Power ON
 
-#define TSL4531_CONF_IT_100			0x02	// 100ms
-#define	TSL4531_CONF_IT_200			0x01	// 200ms
-#define	TSL4531_CONF_IT_400			0x00	// 400ms
+#define TSL4531_CONF_IT_100		0x02	// 100ms
+#define	TSL4531_CONF_IT_200		0x01	// 200ms
+#define	TSL4531_CONF_IT_400		0x00	// 400ms
 
-#define TSL4531_CONF_PSAVE 			0x08
+#define TSL4531_CONF_PSAVE 		0x08
 
 class xSL01: public xCoreClass
 {
