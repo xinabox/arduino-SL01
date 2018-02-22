@@ -23,11 +23,11 @@ void setup() {
 	// Start the Serial Monitor
 	Serial.begin(115200);
 	
-  // Set the I2C Pins for CW01
-#ifdef ESP8266
-  Wire.pins(2, 14);
-  Wire.setClockStretchLimit(15000);
-#endif
+	// Set the I2C Pins for CW01
+	#ifdef ESP8266
+	  Wire.pins(2, 14);
+	  Wire.setClockStretchLimit(15000);
+	#endif
 	
 	// Start the I2C Comunication
 	Wire.begin();
