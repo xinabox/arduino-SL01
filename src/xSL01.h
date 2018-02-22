@@ -18,9 +18,6 @@
 
 // Include File Headers
 #include "xCore.h"
-// I2C Chip Addresses
-#define VEML6075_I2C_ADDRESS 		0x10	// I2C Address of Chip
-#define TSL4531_I2C_ADDRESS 		0x29	// I2C Address of Chip
 
 // Defines VEML6075 Registers
 #define VEML6075_REG_CONF        	0x00 	// Configuration register 
@@ -195,6 +192,10 @@ class xSL01: public xCoreClass
 		float 		LUX;
 		uint8_t 	raw_LUX_L;
 		uint8_t 	raw_LUX_H;
+		
+		// I2C Chip Addresses
+		uint8_t VEML6075_I2C_ADDRESS;	
+		uint8_t TSL4531_I2C_ADDRESS;	
 };
 
 #endif
