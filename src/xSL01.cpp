@@ -20,6 +20,8 @@
  	Constructor
 *********************************************************/
 xSL01::xSL01(void) {
+	VEML6075_I2C_ADDRESS = 0x10;	
+	TSL4531_I2C_ADDRESS = 0x29;
 	UVAintensity = 0.0;
 	UVBintensity = 0.0; 
 	UVindex = 0.0;
