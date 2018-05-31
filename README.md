@@ -1,5 +1,5 @@
 # ☒CHIP SL01
-<img src="extras/SL01-V1.0.0.JPG" width="35%" height="auto" align="right">
+<img src="extras/SL01-V1.0.0.jpg" width="35%" height="auto" align="right">
 Digital (I2C) Light Sensor.
 
 This module can be purchased on [Xinabox CC](https://xinabox.cc/products/SL01/).
