@@ -3,20 +3,20 @@
 #######################################
 
 #######################################
-# Instance			   		(KEYWORD1)
+# Instance	(KEYWORD1)
 #######################################
 
 #######################################
-# Methods and Functions		(KEYWORD2)
+# Methods and Functions	(KEYWORD2)
 #######################################
 
-begin KEYWORD2
-poll  KEYWORD2
-getLUX  KEYWORD2
-getUVA  KEYWORD2
-getUVB  KEYWORD2
-getUVIndex  KEYWORD2
+begin	KEYWORD2
+poll	KEYWORD2
+getLUX	KEYWORD2
+getUVA	KEYWORD2
+getUVB	KEYWORD2
+getUVIndex	KEYWORD2
 
 #######################################
-# Constants 		   		(LITERAL1)
+# Constants	(LITERAL1)
 #######################################
