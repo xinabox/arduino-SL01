@@ -13,7 +13,7 @@
 	TSL4531		- http://wisense.in/datasheets/TSL4531.pdf
 */
 
-#include "arduino-SL01.h"
+#include <SL01.h>
 
 /*---Public Function---*/
 /********************************************************
