@@ -13,8 +13,8 @@
 	VEML6075 Note	- https://www.vishay.com/docs/84339/designingveml6075.pdf
 	TSL4531		- http://wisense.in/datasheets/TSL4531.pdf
 */
-#ifndef SL01_h
-#define SL01_h
+#ifndef xSL01_h
+#define xSL01_h
 
 // Include File Headers
 #include "xCore.h"

@@ -13,7 +13,7 @@
 	TSL4531		- http://wisense.in/datasheets/TSL4531.pdf
 */
 
-#include <SL01.h>
+#include <xSL01.h>
 
 /*---Public Function---*/
 /********************************************************
