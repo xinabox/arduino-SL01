@@ -1,0 +1,22 @@
+language: python
+python:
+    - "2.7"
+
+sudo: false
+cache:
+    directories:
+        - "~/.platformio"
+        
+env:
+    - PLATFORMIO_CI_SRC=examples/SL01_Lux_Measurement
+    - PLATFORMIO_CI_SRC=examples/SL01_UV_Measurements
+    
+install:
+    - pip install -U platformio
+    - platformio update
+
+    - wget https://github.com/xinabox/arduino-CORE/archive/master.zip -O /tmp/arduino-CORE.zip
+    - unzip /tmp/arduino-CORE.zip -d /tmp/
+
+script:
+    - platformio ci --lib="." --lib="/tmp/arduino-CORE-master" --board=uno --board=zero --board=xinabox_cw01 --board=xinabox_cw02
