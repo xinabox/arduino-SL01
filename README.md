@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/xinabox/arduino-SL01.svg?branch=master)](https://travis-ci.org/xinabox/arduino-SL01)
+[![GitHub issues](https://img.shields.io/github/issues/xinabox/arduino-SL01.svg)](https://github.com/xinabox/arduino-SL01/issues)
+
 # ☒CHIP SL01
 <img src="extras/SL01-V1.0.0.jpg" width="35%" height="auto" align="right">
 Digital (I2C) Light Sensor.
