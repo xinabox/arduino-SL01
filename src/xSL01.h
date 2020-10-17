@@ -371,18 +371,23 @@ private:
 	int32_t SI1133_calcEvalPoly(int32_t, int32_t, uint8_t, uint8_t, uint8_t, SI1133_Coeff_TypeDef *);
 };
 
-class xSL01
+class xSL01: public SL01v1, SL01v2
 {
 public:
 	xSL01();
-	void begin();
+	SL01v1 v1;
+	SL01v2 v2;
+	bool begin();
 	float getUVIndex();
 	float getLUX();
+	float getUVA();
+	float getUVB();
 	void poll();
+	uint8_t checkVersion();
 
 private:
 	uint8_t version;
-	uint8_t checkVersion();
+
 };
 
 #endif

@@ -42,6 +42,7 @@ bool SL01v1::begin(void)
 	xCore.write8(TSL4531_I2C_ADDRESS, (TSL4531_WRITE_CMD | TSL4531_REG_CONTROL), TSL4531_CONF_START);
 	xCore.write8(TSL4531_I2C_ADDRESS, (TSL4531_WRITE_CMD | TSL4531_REG_CONF), TSL4531_CONF_IT_100);
 	poll();
+	return true;
 }
 
 /********************************************************
@@ -778,55 +779,65 @@ xSL01::xSL01()
 {
 }
 
-void xSL01::begin()
+bool xSL01::begin()
 {
 	checkVersion();
 	if (version == 1)
 	{
-		SL01v1 v1;
+		//SL01v1 v1;
 		v1.begin();
 	}
 	else if (version == 2)
 	{
-		SL01v2 v2;
+		//SL01v2 v2;
 		v2.SI1133_init();
 	}
+	return true;
 }
 
 float xSL01::getUVIndex()
 {
+	float uvi;
 	if (version == 1)
 	{
-		SL01v1 v1;
+		//SL01v1 v1;
 		v1.poll();
-		return v1.uvi();
+		uvi = v1.uvi();
 	}
 	else if (version == 2)
 	{
-		float uvi, lux;
-		SL01v2 v2;
+		float lux;
+		//SL01v2 v2;
 		v2.SI1133_measurementForce();
 		v2.SI1133_getMeasurement(&lux, &uvi);
-		return uvi;
 	}
+	if (uvi < 0)
+		return 0;
+	else
+		return uvi;
 }
 
 float xSL01::getLUX()
 {
+	float lux;
 	if (version == 1)
 	{
-		SL01v1 v1;
+		//SL01v1 v1;
 		v1.poll();
-		return v1.getLUX();
+		lux = v1.getLUX();
 	}
 	else if (version == 2)
 	{
-		SL01v2 v2;
-		float uvi, lux;
+		//SL01v2 v2;
+		float uvi;
+		//v2.SI1133_init();
 		v2.SI1133_measurementForce();
 		v2.SI1133_getMeasurement(&lux, &uvi);
-		return lux;
 	}
+	if (lux < 0)
+		return 0;
+	else
+		return lux;
 }
 
 uint8_t xSL01::checkVersion()
@@ -839,9 +850,44 @@ uint8_t xSL01::checkVersion()
 	{
 		version = 2;
 	}
+	return version;
 }
 
 void xSL01::poll()
 {
+}
 
+float xSL01::getUVA()
+{
+	if (version == 1)
+	{
+		//SL01v1 v1;
+		float uva = v1.getUVA();
+		;
+		if (uva < 0)
+			return 0;
+		else
+			return uva;
+	}
+	else
+	{
+		return 255;
+	}
+}
+float xSL01::getUVB()
+{
+	if (version == 1)
+	{
+		//SL01v1 v1;
+		float uvb = v1.getUVB();
+		;
+		if (uvb < 0)
+			return 0;
+		else
+			return uvb;
+	}
+	else
+	{
+		return 255;
+	}
 }
