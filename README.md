@@ -8,7 +8,7 @@ Digital (I2C) Light Sensor.
 This module can be purchased on [Xinabox CC](https://xinabox.cc/products/SL01/).
 
 ## About the SL01
-This ☒CHIP forms part of the sensor modules and is equipped with a light sensor that is capable of measuring the luminosity (Wide Dynamic Range — 3 lux to 220k lux) (visual brightness), UVA and UVB radiation. The light sensor converts solar UV light intensity to digital data and has displayed reliable performance of UV radiation measurement under long periods of UV exposure.  This ☒CHIP is also capable of detecting the UVA and UVB radiation of different light bulbs and is ideal for data collection and learning in schools. It has a very low power consumption. 
+This ☒CHIP forms part of the sensor modules and is equipped with a light sensor that is capable of measuring the luminosity (visual brightness), UV radiation. The light sensor converts solar UV light intensity to digital data and has displayed reliable performance of UV radiation measurement under long periods of UV exposure.  This ☒CHIP is also capable of detecting the UV radiation of different light bulbs and is ideal for data collection and learning in schools. It has a very low power consumption. 
 
 The SL01 ☒CHIP is housed in an extremely compact 2U×2U chip with four connection ports.
 Sensor is based on VEML6075/TSL4531:
@@ -17,7 +17,10 @@ Sensor is based on VEML6075/TSL4531:
 
 - TSL4531 - Simple direct ambient light sensor. More information on the TSL4531 can be found in the [datasheet](http://media.digikey.com/pdf/Data%20Sheets/Austriamicrosystems%20PDFs/TSL4531.pdf).
 
-NASA/DOD TRL level 6 and the sensor is RoSH compliant.
+Version 1.1.1+ is based on SI1133:
+- SI1133 - UVI and Ambient light sensor. More information on the TSL4531 can be found in the [datasheet](https://www.mouser.com/datasheet/2/368/Si1133-780640.pdf).
+
+NASA/DOD TRL level 9 and the sensor is RoSH compliant.
 
 This ☒CHIP is included in the Demo Kit.
 
